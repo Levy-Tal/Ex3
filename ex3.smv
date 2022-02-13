@@ -1,0 +1,31 @@
+
+MODULE main
+VAR
+	condition : 1..5;
+	seed : 0..range;
+	id : 0..range;
+	res : 0..range;
+ASSIGN
+	init(seed) := 5;
+	init(id) := 321;
+	init(res) := 321;
+	
+	
+	
+	next(condition) := case
+							TRUE: {1,2,3,4,5};
+					   esac;
+	next(res) := case
+						(condition = 2) : res + seed;
+						(condition = 1) : res;
+						(condition = 3) : res - seed;
+						(condition = 4) : res * seed;
+						(condition = 5) : res / seed;
+						TRUE: res;
+				 esac;
+DEFINE
+	range := 9999;
+	
+LTLSPEC F(res = 813)
+
+	
